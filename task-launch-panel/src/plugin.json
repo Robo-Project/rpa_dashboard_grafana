@@ -1,0 +1,25 @@
+{
+  "type": "panel",
+  "name": "Task launch panel",
+  "id": "Robot ",
+
+  "info": {
+    "description": "Task launch panel",
+    "author": {
+      "name": "Roboteam"
+    },
+    "keywords": ["RPA"],
+    "logos": {
+      "small": "img/logo.svg",
+      "large": "img/logo.svg"
+    },
+    "screenshots": [],
+    "version": "%VERSION%",
+    "updated": "%TODAY%"
+  },
+
+  "dependencies": {
+    "grafanaVersion": "6.3.x",
+    "plugins": []
+  }
+}
