@@ -115,14 +115,59 @@
       "yBucketSize": null
     },
     {
+      "datasource": null,
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 0,
+        "y": 8
+      },
+      "id": 16,
+      "options": {
+        "text": "Task launch"
+      },
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  $__time(time_column),\n  value1\nFROM\n  metric_table\nWHERE\n  $__timeFilter(time_column)\n",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Tasks",
+      "type": "myorgid-simple-panel"
+    },
+    {
       "cacheTimeout": null,
       "content": "<form method=\"post\" action=\"http://localhost:8080/job/Robotest1/job/master/build?delay=0sec\" class=\"inline\" target=\"_blank\">\n  <button style=\"background: #222222;\n  cursor: pointer;\n  font-size: 1em;\n  font-family: serif;\" type=\"submit\" name=\"submit_param\" value=\"submit_value\" class=\"link-button\">\n    This is a link who calls build in job named Robotest1\n  </button>\n</form>\n<form method=\"post\" action=\"http://localhost:8080/job/WikiSearch/job/master/buildWithParameters?SEARCH=Kissa&delay=0sec\" class=\"inline\" target=\"_blank\">\n  <button style=\"background: #222222;\n  cursor: pointer;\n  font-size: 1em;\n  font-family: serif;\" type=\"submit\" name=\"submit_param\" value=\"submit_value\" class=\"link-button\">\n    This is a link who calls build in job named WikiSearch with parameter Kissa\n  </button>\n</form>",
       "datasource": null,
       "gridPos": {
         "h": 8,
         "w": 6,
-        "x": 15,
-        "y": 0
+        "x": 6,
+        "y": 8
       },
       "id": 6,
       "links": [],
@@ -139,25 +184,27 @@
             "mappings": [],
             "max": 100,
             "min": 0,
-            "thresholds": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
           },
-          "override": {},
           "overrides": [],
           "values": false
         },
         "orientation": "vertical",
         "showUnfilled": true
       },
-      "pluginVersion": "6.5.2",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "format": "table",
@@ -226,7 +273,7 @@
         "h": 6,
         "w": 5,
         "x": 0,
-        "y": 8
+        "y": 16
       },
       "id": 2,
       "links": [],
@@ -251,19 +298,21 @@
             "max": 100,
             "min": 0,
             "nullValueMode": "connected",
-            "thresholds": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
             "unit": "none"
           },
-          "override": {},
           "overrides": [],
           "values": false
         },
@@ -271,7 +320,7 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "6.5.2",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "format": "table",
@@ -354,7 +403,7 @@
         "h": 6,
         "w": 4,
         "x": 5,
-        "y": 8
+        "y": 16
       },
       "id": 12,
       "interval": null,
@@ -459,55 +508,10 @@
         }
       ],
       "valueName": "avg"
-    },
-    {
-      "content": "<form method=\"post\" action=\"http://localhost:8080/job/Search/job/master/buildWithParameters?SEARCH=Kissa&delay=0sec\" class=\"inline\" target=\"_blank\">\n  <button style=\"background: #222222;\n  cursor: pointer;\n  font-size: 1em;\n  font-family: serif;\" type=\"submit\" name=\"submit_param\" value=\"submit_value\" class=\"link-button\">\n    Start job from jenkins with name Search and parameter Kissa\n  </button>\n</form>",
-      "datasource": null,
-      "gridPos": {
-        "h": 6,
-        "w": 6,
-        "x": 9,
-        "y": 8
-      },
-      "id": 8,
-      "mode": "html",
-      "options": {},
-      "targets": [
-        {
-          "format": "time_series",
-          "group": [],
-          "metricColumn": "none",
-          "rawQuery": false,
-          "rawSql": "SELECT\n  $__time(time_column),\n  value1\nFROM\n  metric_table\nWHERE\n  $__timeFilter(time_column)\n",
-          "refId": "A",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "column"
-              }
-            ]
-          ],
-          "timeColumn": "time",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Tasks",
-      "type": "text"
     }
   ],
   "refresh": "5s",
-  "schemaVersion": 21,
+  "schemaVersion": 22,
   "style": "dark",
   "tags": [],
   "templating": {
