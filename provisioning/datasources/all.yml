@@ -7,7 +7,7 @@ datasources:
   org_id: 1
   url: 'localhost:5432'
   is_default: true
-  version: 10
+  version: 12
   editable: true
   jsonData:
      sslmode: disable
