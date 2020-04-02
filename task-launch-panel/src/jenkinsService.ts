@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const backToken = 'BACKTOKEN';
-const URL = 'http://localhost:4000';
+const URL = 'BACKURL';
 
 const getAllJobs = async () => {
   const res = await axios.get(`${URL}/jobs`, {
