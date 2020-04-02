@@ -4,7 +4,11 @@ const backToken = 'BACKTOKEN';
 const URL = 'http://localhost:4000';
 
 const getAllJobs = async () => {
-  const res = await axios.get(`${URL}/jobs`);
+  const res = await axios.get(`${URL}/jobs`, {
+    headers: {
+      authorization: backToken,
+    },
+  });
   return res.data;
 };
 
