@@ -15,16 +15,291 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 2,
+  "id": 3,
   "links": [],
   "panels": [
     {
       "datasource": "PostgreSQL",
       "gridPos": {
-        "h": 9,
-        "w": 12,
+        "h": 4,
+        "w": 3,
         "x": 0,
         "y": 0
+      },
+      "id": 8,
+      "options": {
+        "colorMode": "value",
+        "fieldOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 90
+                }
+              ]
+            }
+          },
+          "overrides": [],
+          "values": false
+        },
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto"
+      },
+      "pluginVersion": "6.6.2",
+      "targets": [
+        {
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  count(car_number)\nFROM taxi_drives\n",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "car_number"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "taxi_drives",
+          "timeColumn": "start",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Drives total",
+      "type": "stat"
+    },
+    {
+      "cacheTimeout": null,
+      "datasource": "PostgreSQL",
+      "gridPos": {
+        "h": 3,
+        "w": 4,
+        "x": 4,
+        "y": 0
+      },
+      "id": 12,
+      "links": [],
+      "options": {
+        "colorMode": "value",
+        "fieldOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "defaults": {
+            "mappings": [
+              {
+                "id": 0,
+                "op": "=",
+                "text": "N/A",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "nullValueMode": "connected",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": [],
+          "values": false
+        },
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal"
+      },
+      "pluginVersion": "6.6.2",
+      "targets": [
+        {
+          "format": "table",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "Select \n   Count(CASE WHEN trip_succeeded=false  THEN 0 END) *100.0 / ((Select Count(car_number) From taxi_drives) * 1.00)\nFrom taxi_drives\n\n  \n",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "trip_succeeded"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "variance"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "trip_succeeded"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "taxi_drives",
+          "timeColumn": "start",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Drives failed",
+      "type": "stat"
+    },
+    {
+      "datasource": "PostgreSQL",
+      "gridPos": {
+        "h": 3,
+        "w": 4,
+        "x": 4,
+        "y": 3
+      },
+      "id": 4,
+      "options": {
+        "colorMode": "value",
+        "fieldOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 100
+                }
+              ]
+            },
+            "unit": "lengthkm"
+          },
+          "overrides": [],
+          "values": false
+        },
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto"
+      },
+      "pluginVersion": "6.6.2",
+      "targets": [
+        {
+          "format": "table",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  avg(length) AS \"length\"\nFROM taxi_drives",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "length"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "avg"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "length"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "taxi_drives",
+          "timeColumn": "start",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Average length per ride",
+      "type": "stat"
+    },
+    {
+      "datasource": "PostgreSQL",
+      "gridPos": {
+        "h": 3,
+        "w": 4,
+        "x": 4,
+        "y": 6
       },
       "id": 2,
       "options": {
@@ -44,10 +319,11 @@
                 },
                 {
                   "color": "red",
-                  "value": 80
+                  "value": 100
                 }
               ]
-            }
+            },
+            "unit": "currencyEUR"
           },
           "overrides": [],
           "values": false
@@ -87,10 +363,92 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Avg",
+      "title": "Average price per ride",
       "type": "stat"
+    },
+    {
+      "cacheTimeout": null,
+      "columns": [],
+      "datasource": "PostgreSQL",
+      "fontSize": "100%",
+      "gridPos": {
+        "h": 6,
+        "w": 8,
+        "x": 0,
+        "y": 9
+      },
+      "id": 6,
+      "links": [],
+      "options": {},
+      "pageSize": null,
+      "pluginVersion": "6.6.2",
+      "showHeader": true,
+      "sort": {
+        "col": null,
+        "desc": false
+      },
+      "styles": [
+        {
+          "alias": "Time",
+          "align": "auto",
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "pattern": "Time",
+          "type": "date"
+        },
+        {
+          "alias": "",
+          "align": "right",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 2,
+          "pattern": "/.*/",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        }
+      ],
+      "targets": [
+        {
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  reason_for_failure\nFROM taxi_drives\nWHERE\n  trip_succeeded = false",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "length"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "taxi_drives",
+          "timeColumn": "car_number",
+          "timeColumnType": "int4",
+          "where": [
+            {
+              "name": "$__unixEpochFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Reasons for failed drives",
+      "transform": "table",
+      "type": "table"
     }
   ],
+  "refresh": "5s",
   "schemaVersion": 22,
   "style": "dark",
   "tags": [],
@@ -116,7 +474,7 @@
     ]
   },
   "timezone": "",
-  "title": "taxi_dashboard",
-  "uid": "OBIPvdjZk",
-  "version": 1
+  "title": "taxi_dashboard2",
+  "uid": "OBIPvdjZh",
+  "version": 7
 }
