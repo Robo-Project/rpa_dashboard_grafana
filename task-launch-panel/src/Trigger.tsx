@@ -12,7 +12,7 @@ const Trigger: React.FunctionComponent<TriggerProps> = ({ label, job, parameters
     <div className="gf-form">
       <label className="gf-form-label width-10"> {job} </label>
       <button className="gf-form-btn btn-secondary width-10" type="button" onClick={() => jenkinsService.build(job, parameters)}>
-      {label}
+        {label}
       </button>
     </div>
   );

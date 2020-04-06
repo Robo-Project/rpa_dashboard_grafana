@@ -14,7 +14,7 @@ function App() {
   return (
     <div className="gf-form-group">
       {jobs.map((job, i) => {
-        return <Trigger label="launch" job={job.name} parameters="" />;
+        return <Trigger label="launch job" job={job.name} parameters="" />;
       })}
     </div>
   );
