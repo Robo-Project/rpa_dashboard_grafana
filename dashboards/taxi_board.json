@@ -249,7 +249,117 @@
     },
     {
       "aliasColors": {},
-      "bars": true,
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "PostgreSQL",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "hiddenSeries": false,
+      "id": 20,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": false,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": true,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n taxi_drives.start AS time, AVG(passengers) as passengers, SUM(price) AS price FROM taxi_drives WHERE $__timeFilter(start)\nGROUP BY taxi_drives.start",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "length"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "taxi_drives",
+          "timeColumn": "start",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Passenger count and prices",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
       "dashLength": 10,
       "dashes": false,
       "datasource": "PostgreSQL",
@@ -281,7 +391,7 @@
       "percentage": false,
       "pluginVersion": "6.6.2",
       "pointradius": 2,
-      "points": false,
+      "points": true,
       "renderer": "flot",
       "seriesOverrides": [],
       "spaceLength": 10,
@@ -293,7 +403,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "\nSELECT\n taxi_drives.start AS time, SUM(price) as price FROM taxi_drives WHERE $__timeFilter(start)\nGROUP BY taxi_drives.start",
+          "rawSql": "\nSELECT\n taxi_drives.start AS time, AVG(price) as price FROM taxi_drives WHERE $__timeFilter(start)\nGROUP BY taxi_drives.start",
           "refId": "A",
           "select": [
             [
@@ -644,7 +754,7 @@
     "list": []
   },
   "time": {
-    "from": "now-90d",
+    "from": "now-7d",
     "to": "now"
   },
   "timepicker": {
