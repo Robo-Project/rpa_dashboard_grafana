@@ -293,7 +293,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "\nSELECT\n taxi_drives.start AS time, SUM(price) as price FROM taxi_drives WHERE $__timeFilter(start)\nGROUP BY taxi_drives.start",
+          "rawSql": "\nSELECT\n taxi_drives.startTime AS time, SUM(price) as price FROM taxi_drives WHERE $__timeFilter(startTime)\nGROUP BY taxi_drives.startTime",
           "refId": "A",
           "select": [
             [
@@ -594,7 +594,7 @@
           ],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  avg(length) AS \"length\"\nFROM taxi_drives",
+          "rawSql": "SELECT\n  avg(lengthOfDrive) AS \"length\"\nFROM taxi_drives",
           "refId": "A",
           "select": [
             [
