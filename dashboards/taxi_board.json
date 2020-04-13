@@ -18,11 +18,126 @@
   "links": [],
   "panels": [
     {
+      "aliasColors": {},
+      "bars": false,
+      "cacheTimeout": null,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "PostgreSQL",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "hiddenSeries": false,
+      "id": 22,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pluginVersion": "6.6.2",
+      "pointradius": 2,
+      "points": true,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  $__timeGroup(start_time, '1d', 0),\n  count(xml_hash) as \"Drives per day\"\nFROM taxi_drives\nWHERE\n  $__timeFilter(start_time)\nGROUP BY time\nORDER BY time",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "length_of_drive"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "taxi_drives",
+          "timeColumn": "start_time",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Total drives per day",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": 30,
+        "max": null,
+        "min": 0,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
       "datasource": "PostgreSQL",
       "gridPos": {
         "h": 4,
-        "w": 3,
-        "x": 0,
+        "w": 5,
+        "x": 12,
         "y": 0
       },
       "id": 8,
@@ -95,11 +210,11 @@
       "datasource": "PostgreSQL",
       "gridPos": {
         "h": 4,
-        "w": 5,
-        "x": 3,
+        "w": 3,
+        "x": 17,
         "y": 0
       },
-      "id": 18,
+      "id": 32,
       "options": {
         "colorMode": "value",
         "fieldOptions": {
@@ -108,163 +223,6 @@
           ],
           "defaults": {
             "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "red",
-                  "value": null
-                },
-                {
-                  "color": "#6ED0E0",
-                  "value": 20
-                },
-                {
-                  "color": "yellow",
-                  "value": 50
-                },
-                {
-                  "color": "green",
-                  "value": 100
-                }
-              ]
-            },
-            "unit": "currencyEUR"
-          },
-          "overrides": [],
-          "values": false
-        },
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto"
-      },
-      "pluginVersion": "6.6.2",
-      "targets": [
-        {
-          "format": "table",
-          "group": [],
-          "metricColumn": "none",
-          "rawQuery": true,
-          "rawSql": "SELECT\n  price\nFROM taxi_drives\n",
-          "refId": "A",
-          "select": [
-            [
-              {
-                "params": [
-                  "price"
-                ],
-                "type": "column"
-              }
-            ]
-          ],
-          "table": "taxi_drives",
-          "timeColumn": "start",
-          "timeColumnType": "timestamp",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Profit total",
-      "type": "stat"
-    },
-    {
-      "datasource": "PostgreSQL",
-      "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 8,
-        "y": 0
-      },
-      "id": 2,
-      "options": {
-        "colorMode": "value",
-        "fieldOptions": {
-          "calcs": [
-            "mean"
-          ],
-          "defaults": {
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 100
-                }
-              ]
-            },
-            "unit": "currencyEUR"
-          },
-          "overrides": [],
-          "values": false
-        },
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto"
-      },
-      "pluginVersion": "6.6.2",
-      "targets": [
-        {
-          "format": "table",
-          "group": [],
-          "metricColumn": "none",
-          "rawQuery": true,
-          "rawSql": "SELECT\n  avg(price) AS \"price\"\nFROM taxi_drives\n",
-          "refId": "A",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "column"
-              }
-            ]
-          ],
-          "timeColumn": "time",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Average price per ride",
-      "type": "stat"
-    },
-    {
-      "datasource": "PostgreSQL",
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 0
-      },
-      "id": 24,
-      "options": {
-        "displayMode": "gradient",
-        "fieldOptions": {
-          "calcs": [
-            "mean"
-          ],
-          "defaults": {
-            "mappings": [],
-            "min": 0,
             "thresholds": {
               "mode": "absolute",
               "steps": [
@@ -278,14 +236,14 @@
                 }
               ]
             },
-            "title": "$__cell_0",
             "unit": "currencyEUR"
           },
           "overrides": [],
-          "values": true
+          "values": false
         },
-        "orientation": "vertical",
-        "showUnfilled": true
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto"
       },
       "pluginVersion": "6.6.2",
       "targets": [
@@ -294,7 +252,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  driver,\n  sum(price)\nFROM taxi_drives\nGROUP BY driver\nORDER BY -sum(price)",
+          "rawSql": "SELECT\n  SUM(price) / SUM(length_of_drive)\nFROM taxi_drives\n",
           "refId": "A",
           "select": [
             [
@@ -320,16 +278,16 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Profit per driver",
-      "type": "bargauge"
+      "title": "Profit per km driven",
+      "type": "stat"
     },
     {
       "datasource": "PostgreSQL",
       "gridPos": {
         "h": 4,
         "w": 4,
-        "x": 0,
-        "y": 4
+        "x": 20,
+        "y": 0
       },
       "id": 4,
       "options": {
@@ -421,18 +379,100 @@
     {
       "datasource": "PostgreSQL",
       "gridPos": {
-        "h": 7,
-        "w": 8,
-        "x": 4,
+        "h": 4,
+        "w": 5,
+        "x": 12,
         "y": 4
       },
-      "id": 14,
-      "interval": "",
+      "id": 18,
       "options": {
-        "displayMode": "basic",
+        "colorMode": "value",
         "fieldOptions": {
           "calcs": [
             "sum"
+          ],
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "red",
+                  "value": null
+                },
+                {
+                  "color": "#6ED0E0",
+                  "value": 20
+                },
+                {
+                  "color": "yellow",
+                  "value": 50
+                },
+                {
+                  "color": "green",
+                  "value": 100
+                }
+              ]
+            },
+            "unit": "currencyEUR"
+          },
+          "overrides": [],
+          "values": false
+        },
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto"
+      },
+      "pluginVersion": "6.6.2",
+      "targets": [
+        {
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  SUM(price) AS price\nFROM taxi_drives\n",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "price"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "taxi_drives",
+          "timeColumn": "start",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Profit total",
+      "type": "stat"
+    },
+    {
+      "datasource": "PostgreSQL",
+      "gridPos": {
+        "h": 8,
+        "w": 7,
+        "x": 17,
+        "y": 4
+      },
+      "id": 24,
+      "options": {
+        "displayMode": "gradient",
+        "fieldOptions": {
+          "calcs": [
+            "mean"
           ],
           "defaults": {
             "mappings": [],
@@ -451,7 +491,7 @@
               ]
             },
             "title": "$__cell_0",
-            "unit": "none"
+            "unit": "currencyEUR"
           },
           "overrides": [],
           "values": true
@@ -466,20 +506,20 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\nreason_for_failure,\n  count(reason_for_failure)\nFROM taxi_drives\nWHERE\n  trip_succeeded = false\nGROUP BY reason_for_failure\nORDER BY count(reason_for_failure)",
+          "rawSql": "SELECT\n  driver,\n  sum(price)\nFROM taxi_drives\nGROUP BY driver\nORDER BY -sum(price)",
           "refId": "A",
           "select": [
             [
               {
                 "params": [
-                  "length"
+                  "length_of_drive"
                 ],
                 "type": "column"
               }
             ]
           ],
           "table": "taxi_drives",
-          "timeColumn": "start",
+          "timeColumn": "start_time",
           "timeColumnType": "timestamp",
           "where": [
             {
@@ -492,20 +532,131 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Reasons for failed drives",
+      "title": "Profit per driver",
       "type": "bargauge"
     },
     {
+      "aliasColors": {},
+      "bars": false,
       "cacheTimeout": null,
+      "dashLength": 10,
+      "dashes": false,
       "datasource": "PostgreSQL",
+      "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
-        "h": 3,
-        "w": 4,
+        "h": 8,
+        "w": 12,
         "x": 0,
         "y": 8
       },
-      "id": 12,
+      "hiddenSeries": false,
+      "id": 36,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
       "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pluginVersion": "6.6.2",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  $__timeGroup(start_time, '1h', 0), \n  sum(passengers) as p\nFROM taxi_drives \nWHERE $__timeFilter(start_time)\nGROUP BY time\nORDER BY time",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "length_of_drive"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "taxi_drives",
+          "timeColumn": "start_time",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Passengers per hour",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "datasource": "PostgreSQL",
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 12,
+        "y": 8
+      },
+      "id": 2,
       "options": {
         "colorMode": "value",
         "fieldOptions": {
@@ -513,16 +664,7 @@
             "mean"
           ],
           "defaults": {
-            "mappings": [
-              {
-                "id": 0,
-                "op": "=",
-                "text": "N/A",
-                "type": 1,
-                "value": "null"
-              }
-            ],
-            "nullValueMode": "connected",
+            "mappings": [],
             "thresholds": {
               "mode": "absolute",
               "steps": [
@@ -532,61 +674,39 @@
                 },
                 {
                   "color": "red",
-                  "value": 80
+                  "value": 100
                 }
               ]
             },
-            "unit": "percent"
+            "unit": "currencyEUR"
           },
           "overrides": [],
           "values": false
         },
         "graphMode": "area",
         "justifyMode": "auto",
-        "orientation": "horizontal"
+        "orientation": "auto"
       },
       "pluginVersion": "6.6.2",
       "targets": [
         {
           "format": "table",
-          "group": [
-            {
-              "params": [
-                "$__interval",
-                "none"
-              ],
-              "type": "time"
-            }
-          ],
+          "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "Select \n   Count(CASE WHEN trip_succeeded=false  THEN 0 END) *100.0 / ((Select Count(car_number) From taxi_drives) * 1.00)\nFrom taxi_drives\n\n  \n",
+          "rawSql": "SELECT\n  avg(price) AS \"price\"\nFROM taxi_drives\n",
           "refId": "A",
           "select": [
             [
               {
                 "params": [
-                  "trip_succeeded"
+                  "value"
                 ],
                 "type": "column"
-              },
-              {
-                "params": [
-                  "variance"
-                ],
-                "type": "aggregate"
-              },
-              {
-                "params": [
-                  "trip_succeeded"
-                ],
-                "type": "alias"
               }
             ]
           ],
-          "table": "taxi_drives",
-          "timeColumn": "start",
-          "timeColumnType": "timestamp",
+          "timeColumn": "time",
           "where": [
             {
               "name": "$__timeFilter",
@@ -598,7 +718,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Drives failed",
+      "title": "Average price per ride",
       "type": "stat"
     },
     {
@@ -613,7 +733,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 8
+        "y": 12
       },
       "hiddenSeries": false,
       "id": 16,
@@ -713,54 +833,56 @@
       }
     },
     {
-      "aliasColors": {},
-      "bars": true,
-      "cacheTimeout": null,
-      "dashLength": 10,
-      "dashes": false,
       "datasource": "PostgreSQL",
-      "fill": 1,
-      "fillGradient": 0,
       "gridPos": {
-        "h": 8,
-        "w": 12,
+        "h": 4,
+        "w": 5,
         "x": 0,
-        "y": 11
+        "y": 16
       },
-      "hiddenSeries": false,
-      "id": 22,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": false,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
+      "id": 28,
       "options": {
-        "dataLinks": []
+        "colorMode": "value",
+        "fieldOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "semi-dark-red",
+                  "value": null
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 30
+                },
+                {
+                  "color": "green",
+                  "value": 50
+                }
+              ]
+            },
+            "unit": "currencyEUR"
+          },
+          "overrides": [],
+          "values": false
+        },
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto"
       },
-      "percentage": false,
       "pluginVersion": "6.6.2",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
       "targets": [
         {
-          "format": "time_series",
+          "format": "table",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  $__timeGroup(start_time, '1d', 0),\n  count(xml_hash) as \"Drives per day\"\nFROM taxi_drives\nWHERE\n  $__timeFilter(start_time)\nGROUP BY time\nORDER BY time",
+          "rawSql": "SELECT \nSUM(price) AS \"price\"\nFROM taxi_drives    \nWHERE start_time >= (now() - interval '1 days')\nGROUP BY taxi_drives.start_time",
           "refId": "A",
           "select": [
             [
@@ -784,48 +906,186 @@
           ]
         }
       ],
-      "thresholds": [],
       "timeFrom": null,
-      "timeRegions": [],
       "timeShift": null,
-      "title": "Total drives per day",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
+      "title": "Profit for last day",
+      "type": "stat"
+    },
+    {
+      "datasource": "PostgreSQL",
+      "gridPos": {
+        "h": 9,
+        "w": 7,
+        "x": 5,
+        "y": 16
       },
-      "type": "graph",
-      "xaxis": {
-        "buckets": 30,
-        "max": null,
-        "min": 0,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
+      "id": 14,
+      "interval": "",
+      "options": {
+        "displayMode": "basic",
+        "fieldOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "defaults": {
+            "mappings": [],
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "title": "$__cell_0",
+            "unit": "none"
+          },
+          "overrides": [],
+          "values": true
         },
+        "orientation": "vertical",
+        "showUnfilled": true
+      },
+      "pluginVersion": "6.6.2",
+      "targets": [
         {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\nreason_for_failure,\n  count(reason_for_failure)\nFROM taxi_drives\nWHERE\n  trip_succeeded = false\nGROUP BY reason_for_failure\nORDER BY count(reason_for_failure)",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "length"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "taxi_drives",
+          "timeColumn": "start",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
         }
       ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Reasons for failed drives",
+      "type": "bargauge"
+    },
+    {
+      "datasource": "PostgreSQL",
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 0,
+        "y": 20
+      },
+      "id": 26,
+      "options": {
+        "colorMode": "value",
+        "fieldOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "semi-dark-red",
+                  "value": null
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 100
+                },
+                {
+                  "color": "green",
+                  "value": 300
+                }
+              ]
+            },
+            "unit": "currencyEUR"
+          },
+          "overrides": [],
+          "values": false
+        },
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto"
+      },
+      "pluginVersion": "6.6.2",
+      "targets": [
+        {
+          "format": "table",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT \nSUM(price) AS \"price\"\nFROM taxi_drives    \nWHERE start_time >= (now() - interval '7 days')\nGROUP BY taxi_drives.start_time",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "price"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "sum"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "price"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "taxi_drives",
+          "timeColumn": "start_time",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Profit for last week",
+      "type": "stat"
     },
     {
       "aliasColors": {},
@@ -839,7 +1099,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 16
+        "y": 20
       },
       "hiddenSeries": false,
       "id": 20,
@@ -936,6 +1196,187 @@
         "align": false,
         "alignLevel": null
       }
+    },
+    {
+      "datasource": "PostgreSQL",
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 0,
+        "y": 24
+      },
+      "id": 30,
+      "options": {
+        "colorMode": "value",
+        "fieldOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "yellow",
+                  "value": null
+                },
+                {
+                  "color": "green",
+                  "value": 1000
+                }
+              ]
+            },
+            "unit": "currencyEUR"
+          },
+          "overrides": [],
+          "values": false
+        },
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto"
+      },
+      "pluginVersion": "6.6.2",
+      "targets": [
+        {
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT \nSUM(price) AS \"price\"\nFROM taxi_drives    \nWHERE start_time >= (now() - interval '30 days')\nGROUP BY taxi_drives.start_time",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "length_of_drive"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "taxi_drives",
+          "timeColumn": "start_time",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Profit for last month",
+      "type": "stat"
+    },
+    {
+      "cacheTimeout": null,
+      "datasource": "PostgreSQL",
+      "gridPos": {
+        "h": 3,
+        "w": 7,
+        "x": 5,
+        "y": 25
+      },
+      "id": 12,
+      "links": [],
+      "options": {
+        "colorMode": "value",
+        "fieldOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "defaults": {
+            "mappings": [
+              {
+                "id": 0,
+                "op": "=",
+                "text": "N/A",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "nullValueMode": "connected",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": [],
+          "values": false
+        },
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal"
+      },
+      "pluginVersion": "6.6.2",
+      "targets": [
+        {
+          "format": "table",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "Select \n   Count(CASE WHEN trip_succeeded=false  THEN 0 END) *100.0 / ((Select Count(car_number) From taxi_drives) * 1.00)\nFrom taxi_drives\n\n  \n",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "trip_succeeded"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "variance"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "trip_succeeded"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "taxi_drives",
+          "timeColumn": "start",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Drives failed",
+      "type": "stat"
     }
   ],
   "refresh": "5s",
@@ -966,5 +1407,5 @@
   "timezone": "",
   "title": "taxi_dashboard2",
   "uid": "OBIPvdjZh",
-  "version": 2
+  "version": 1
 }
