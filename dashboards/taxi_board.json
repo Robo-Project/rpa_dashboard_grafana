@@ -551,6 +551,7 @@
         "y": 8
       },
       "hiddenSeries": false,
+      "hideTimeOverride": false,
       "id": 36,
       "legend": {
         "avg": false,
@@ -583,7 +584,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  $__timeGroup(start_time, '1h', 0), \n  sum(passengers) as p\nFROM taxi_drives \nWHERE $__timeFilter(start_time)\nGROUP BY time\nORDER BY time",
+          "rawSql": "SELECT\n  $__timeGroup(start_time, '1h', 0), \n  sum(passengers) as \"Passengers per hour\"\nFROM taxi_drives \nWHERE $__timeFilter(start_time)\nGROUP BY time\nORDER BY time",
           "refId": "A",
           "select": [
             [
@@ -610,7 +611,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
+      "timeShift": "7d",
       "title": "Passengers per hour",
       "tooltip": {
         "shared": true,
@@ -959,7 +960,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\nreason_for_failure,\n  count(reason_for_failure)\nFROM taxi_drives\nWHERE\n  trip_succeeded = false\nGROUP BY reason_for_failure\nORDER BY count(reason_for_failure)",
+          "rawSql": "SELECT\nreason_for_failure,\n  count(reason_for_failure)\nFROM taxi_drives\nWHERE\n  trip_succeeded = false\nGROUP BY reason_for_failure\nORDER BY -count(reason_for_failure)",
           "refId": "A",
           "select": [
             [
